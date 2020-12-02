@@ -14,6 +14,10 @@ Related [Blog](https://isurunuwanthilaka.github.io/engineering/2020/10/25/oauth2
 
 ## Docker Build
 
+* Install dependencies for the first time
+
+`mvn install`
+
 * Package the project
 
 `mvn clean package`
@@ -24,4 +28,4 @@ Related [Blog](https://isurunuwanthilaka.github.io/engineering/2020/10/25/oauth2
 
 * Run docker container
 
-`docker run -d -p 8082:8082 oauth-ca`
+`docker run -d -p 8082:8082 --name oauth-ca oauth-ca`
