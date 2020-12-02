@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -34,6 +35,14 @@ public class AuthController {
     public ResponseEntity home() {
         return ResponseHelper.setResponse("Home Page.");
     }
+
+//    @GetMapping("/home")
+//    @ApiOperation(value = "Home")
+//    @ApiResponses(value = {@ApiResponse(code = 200, message = "success")})
+//    public void home(HttpServletResponse response) {
+//        response.setHeader("Location", "http://localhost:3000/");
+//        response.setStatus(302);
+//    }
 
     @GetMapping("/jwt")
     @ApiOperation(value = "JWT Endpoint")
