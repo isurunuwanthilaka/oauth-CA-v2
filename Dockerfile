@@ -1,16 +1,11 @@
-# Build stage
-FROM maven:3.6.0-jdk-11-slim AS build
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml -P qa clean package
-
-# Package stage
 FROM openjdk:11.0.3-jre-slim-stretch
 RUN echo "Asia/Colombo" > /etc/timezone
-RUN useradd -ms /bin/bash admin
+RUN useradd -ms /bin/bash millenniumitesp
 
-USER admin
+RUN mkdir /var/log/app
+RUN chown -R 1000:1000 /var/log/app
 
-COPY --from=build /home/app/target/demo*.jar /usr/local/lib/app.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/lib/app.jar"]
+USER millenniumitesp
+ADD target/demo-*.jar app.jar
+ADD src/main/resources/*.properties ./
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","app.jar"]

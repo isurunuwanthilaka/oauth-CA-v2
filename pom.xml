@@ -24,6 +24,7 @@
         <hibernate-types-52.version>2.10.0</hibernate-types-52.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jsonwebtoken.version>0.9.1</jsonwebtoken.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencies>
@@ -51,6 +52,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
+            <version>2.2.4.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -107,6 +109,7 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-jwt</artifactId>
+            <version>1.1.1.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -136,15 +139,16 @@
             <properties>
                 <activatedProperties>dev</activatedProperties>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
         <profile>
             <id>qa</id>
             <properties>
                 <activatedProperties>qa</activatedProperties>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
         </profile>
     </profiles>
 
