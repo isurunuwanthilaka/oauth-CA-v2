@@ -11,3 +11,17 @@ This is the template for Spring Boot OAuth2.0 Client Application (CA)
 * This is a hybrid with `OAuth2.0` and `JWT`. `OAuth2` provides authentication for primary application and `JWT` provides authorization information for the secondary system  
 
 Related [Blog](https://isurunuwanthilaka.github.io/engineering/2020/10/25/oauth2-jwt-hybrid-architecture)
+
+## Docker Build
+
+* Package the project
+
+`mvn clean package`
+
+* Build docker image
+
+`docker build -t oauth-ca ./`
+
+* Run docker container
+
+`docker run -d -p 8082:8082 oauth-ca`
