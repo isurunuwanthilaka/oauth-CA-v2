@@ -1,38 +1,33 @@
 version: "3.7"
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
+  oauth-as:
+      image: oauth-as:latest
+      container_name: oauth-as
+      expose:
+        - 8081
+      ports:
+        - 8081:8081
+      restart: unless-stopped
+      environment:
+        - SPRING_PROFILES_ACTIVE=dev
+      volumes:
+        - oauth-as-data:/logs
+  oauth-ca:
+    image: oauth-ca:latest
+    container_name: oauth-ca
     expose:
-    - 5432
+      - 8082
     ports:
-      - 5432:5432
-    environment:
-         - POSTGRES_PASSWORD=nimda
-         - POSTGRES_USER=postgres
-         - POSTGRES_DB=test_db
-    restart: unless-stopped
-  demo:
-    image: demo:latest
-    container_name: demo
-    expose:
-      - 8080
-    ports:
-      - 8080:8080
+      - 8082:8082
     restart: unless-stopped
     depends_on:
-      - postgres
+      - oauth-as
     links:
-      - postgres
+      - oauth-as
     environment:
-      - SPRING_PROFILES_ACTIVE=qa
-      - POSTGRES_PASSWORD=nimda
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=test_db
+      - SPRING_PROFILES_ACTIVE=dev
     volumes:
-      - demo-data:/logs
+      - oauth-ca-data:/logs
 volumes:
-  postgres-data:
-  demo-data:
+  oauth-as-data:
+  oauth-ca-data:

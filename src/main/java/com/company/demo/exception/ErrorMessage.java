@@ -5,6 +5,7 @@ import lombok.Getter;
 public enum ErrorMessage {
 
     MALFORMED_REQUEST("Malformed request.Check the Authorization header."),
+    INVALID_JWT("Invalid JWT."),
     UNAUTHENTICATED("User not authenticated.");
 
     @Getter

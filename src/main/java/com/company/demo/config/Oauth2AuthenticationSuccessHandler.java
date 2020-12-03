@@ -61,7 +61,7 @@ public class Oauth2AuthenticationSuccessHandler implements AuthenticationSuccess
             } catch (Exception e) {
                 log.error("Error Syncing Authenticated user to database : {}", e.getLocalizedMessage());
             }
-            return Url.HOME.getUrl();
+            return Url.LOGIN.getUrl();
         } else {
             return Url.LOGOUT.getUrl();
         }

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum Url {
 
-    HOME("/home"),
+    LOGIN("/login"),
     LOGOUT("/logout"),
     LOGOUT_SUCCESS("/logout-success"),
     JWT_VALIDATE("/jwt/validate");

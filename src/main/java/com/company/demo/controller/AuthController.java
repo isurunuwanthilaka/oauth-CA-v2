@@ -29,20 +29,13 @@ public class AuthController {
     private final UserDetailService userDetailService;
     private final JwtTokenService jwtTokenService;
 
-    @GetMapping("/home")
-    @ApiOperation(value = "Home")
+    @GetMapping("/login")
+    @ApiOperation(value = "Login")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "success")})
-    public ResponseEntity home() {
-        return ResponseHelper.setResponse("Home Page.");
+    public void login(HttpServletResponse response) {
+        response.setHeader("Location", "http://localhost:3000/login");
+        response.setStatus(302);
     }
-
-//    @GetMapping("/home")
-//    @ApiOperation(value = "Home")
-//    @ApiResponses(value = {@ApiResponse(code = 200, message = "success")})
-//    public void home(HttpServletResponse response) {
-//        response.setHeader("Location", "http://localhost:3000/");
-//        response.setStatus(302);
-//    }
 
     @GetMapping("/jwt")
     @ApiOperation(value = "JWT Endpoint")
@@ -69,14 +62,18 @@ public class AuthController {
             return ResponseHelper.setError(HttpStatus.NOT_ACCEPTABLE, ErrorMessage.MALFORMED_REQUEST);
         }
 
-        boolean isValid = jwtTokenService.validateToken(token);
-        return ResponseHelper.setResponse(isValid);
+        if (jwtTokenService.validateToken(token)) {
+            return ResponseHelper.setResponse(true);
+        } else {
+            return ResponseHelper.setError(HttpStatus.BAD_REQUEST, ErrorMessage.INVALID_JWT);
+        }
     }
 
     @RequestMapping("/logout-success")
     @ApiOperation(value = "Logout Success Page")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "success")})
-    public ResponseEntity logout() {
-        return ResponseHelper.setResponse("Logout success.");
+    public void logoutSuccess(HttpServletResponse response) {
+        response.setHeader("Location", "http://localhost:3000/login");
+        response.setStatus(302);
     }
 }
